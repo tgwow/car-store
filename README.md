@@ -1,13 +1,9 @@
 # car-store
-A place to annouce cars on the web, made in challenge-29 of the ninja-javascript-course.
+A place to annouce cars on the web, made in the ninja-javascript-course.
 
-## Instalation
-In the server folder, run: 
-```
-npm install
-npm start
-```
-After, open the index.html on your browser.
+## Usage
+Switch between the branchs to see the different implementations.
 
 ## Technologies
-Vanilla Javascript
+Vanilla [JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[Node.js](https://nodejs.org/en/) - in the last two challenges.
