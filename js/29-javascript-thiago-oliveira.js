@@ -57,7 +57,7 @@ import DOM from './29-javascript-thiago-oliveira-DOM.js';
 
             companyInfo: function companyInfo() {
                 const ajax = new XMLHttpRequest();
-                ajax.open('GET', '../data/company.json');
+                ajax.open('GET', './data/company.json');
                 ajax.send()
                 ajax.addEventListener('load', this.handleRequestLoaded);
             },
@@ -73,27 +73,50 @@ import DOM from './29-javascript-thiago-oliveira-DOM.js';
             },
 
             addNewCar: function addNewCar() {
-                const tr = document.createElement('tr');
+                const tr = this.elt('tr');
 
                 $fields.forEach((field) => {
                     if (field.name === 'picture') {
-                        const th = document.createElement('th');
-                        const img = document.createElement('img')
-                        img.setAttribute('src', field.value);
-                        th.appendChild(img);
+                        const img = this.elt('img', {src: field.value});
+                        const th = this.elt('th', null, img);
                         tr.appendChild(th);
                         return;
                     }
-
-                    const th = document.createElement('th');
-                    th.textContent = field.value;
+                    const th = this.elt('th', null, field.value);
                     tr.appendChild(th);
                 });
+                const buttonRemove = this.elt('button', {class: "button--red"}, 'Remover');
+                buttonRemove.addEventListener('click', this.handleRemoveItem);
+
+                const th = this.elt('th', null, buttonRemove);
+
+                tr.appendChild(th);
                 $tbody.appendChild(tr);
+            },
+
+            handleRemoveItem: function handleRemoveItem() {
+                this.parentNode.parentNode.remove();
             },
 
             isRequestOk: function isRequestOk(ajax) {
                 return ajax.readyState === 4 && ajax.status === 200;
+            },
+
+            elt: function elt(tag, attributes, ...args) {
+                const node = document.createElement(tag);
+
+                if (attributes)
+                    for (let attr in attributes)
+                        node.setAttribute(attr, attributes[attr]);
+
+                if (args.length)
+                    for(let i = 0; i < args.length; i++) {
+                        let child = args[i];
+                        if (typeof child === 'string')
+                            child = document.createTextNode(args[i]);
+                        node.appendChild(child);
+                    }
+                return node;
             }
         }
     })();
