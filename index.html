@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenge 29 - Company Car </title>
+</head>
+<style>
+    *,
+    ::after,
+    ::before {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    h1 {
+        margin: 50px 0;
+    }
+
+    .form {
+        width: 250px;
+    }
+
+    .form__group {
+        margin-bottom: 10px;
+    }
+
+    .form__label {
+        display: block;
+    }
+
+    .form__input {
+        padding: 5px 10px;
+        outline: none;
+        width: 100%;
+
+    }
+
+    button {
+        width: 100%;
+        padding: 15px 5px;
+        background-color: #018002;
+        color: white;
+        border: 1px solid gray;
+        cursor: pointer;
+        transition: .2s;
+    }
+    button:hover {
+        filter: opacity(.9);
+    }
+
+    thead th {
+        padding: 5px 20px;
+        border: 1px solid #ccc;
+        background-color: #eee;
+    }
+
+    tbody th {
+        font-weight: 500;
+        padding: 5px 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    tbody tr img {
+        max-width: 125px;
+    }
+</style>
+<body>
+    <h1>-</h1>
+    <main>
+        <form autocomplete="off" class="form" name="form">
+            <div class="form__group">
+                <label for="picture" class="form__label">Imagem</label>
+                <input id="picture" class="form__input" name="picture">
+            </div>
+            <div class="form__group">
+                <label for="marca" class="form__label">Marca/Modelo</label>
+                <input id="marca" class="form__input" name="marca">
+            </div>
+
+            <div class="form__group">
+                <label for="ano" class="form__label">Ano</label>
+                <input type="number" id="ano" class="form__input" name="ano">
+            </div>
+
+            <div class="form__group">
+                <label for="placa" class="form__label">Placa</label>
+                <input id="placa" class="form__input" name="placa">
+            </div>
+
+            <div class="form__group">
+                <label for="cor" class="form__label">Cor</label>
+                <input id="cor" class="form__input" name="cor">
+            </div>
+
+            <button>Cadastrar</button>
+        </form>
+
+        <section class="carros">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagem do carro</th>
+                        <th>Marca/Modelo</th>
+                        <th>Ano</th>
+                        <th>Placa</th>
+                        <th>Cor</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="js/29-javascript-thiago-oliveira.js"></script>
+</body>
+</html>
