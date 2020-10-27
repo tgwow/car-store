@@ -5,11 +5,10 @@ const router = express.Router();
 const multer = require('multer');
 
 const upload = multer();
-const data = [];
+let data = [];
 
 router.get('/', function(req, res) {
     console.log('[GET] /car:', data);
-
     res.json(data);
 });
 
@@ -36,4 +35,13 @@ router.post('/', upload.none(), function(req, res) {
     res.json({ message: 'success' });
 });
 
+
+router.delete('/', function(req, res) {
+    const placa = req.body.placa;
+    data = data.filter((car) => {
+        return car.placa !== placa;
+    })
+
+    console.log('[DELETE] /car:', data);
+});
 module.exports = router;

@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 const routes = require('./routes');
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false}));
 
 app.get('/', function(req, res) {
   res.json({ message: 'hi' });

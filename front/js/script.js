@@ -91,16 +91,12 @@ import DOM from './DOM.js';
                     const th = this.elt('th', null, car[key]);
                     tr.appendChild(th);
                 }
-                // TODO: REMOVE CAR FROM PLATE
-                const buttonRemove = this.createButtonElement('Remover');
+                // DONE: REMOVE CAR FROM PLATE
+                const buttonRemove = this.createButtonElement('Remover', car['placa']);
                 const th = this.elt('th', null, buttonRemove);
 
                 tr.appendChild(th);
                 $tbody.appendChild(tr);
-            },
-
-            handleRemoveItem: function handleRemoveItem() {
-                this.parentNode.parentNode.remove();
             },
 
             clearFields: function clearFields() {
@@ -146,7 +142,6 @@ import DOM from './DOM.js';
                         const data = JSON.parse(this.response);
                         app.loadCars(data);
                     } catch (e) {
-                        console.log('Nothing yet?');
                         console.log(e)
                     }
             },
@@ -154,7 +149,8 @@ import DOM from './DOM.js';
             showMessage(type) {
                 const messages = {
                     'success': 'Carro cadastrado com sucesso!',
-                    'error': 'Carro não cadastrado!'
+                    'error': 'Carro não cadastrado!',
+                    'deleted': 'Carro deletado!'
                 };
                 // TODO: CHANGE MESSAGE ALERT TO A SPAN ANIMATED
                 alert(messages[type]);
@@ -170,10 +166,20 @@ import DOM from './DOM.js';
                 return th;
             },
 
-            createButtonElement: function createButtonElement(text) {
-                const button = this.elt('button', {class: "button--red"}, text);
+            createButtonElement: function createButtonElement(text, placa) {
+                const button = this.elt('button', {class: "button--red", data_js: placa }, text);
                 button.addEventListener('click', this.handleRemoveItem);
                 return button;
+            },
+
+            handleRemoveItem: function handleRemoveItem() {
+                const placa = this.getAttribute('data_js');
+                const ajax = new XMLHttpRequest();
+                ajax.open('DELETE', url);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                ajax.send(`placa=${placa}`);
+
+                this.parentNode.parentNode.remove();
             },
 
             elt: function elt(tag, attributes, ...args) {
